@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Website Syehan </title>
+  <style>
+    /* ==== Umum ==== */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      color: #080219ef;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 40px;
+      background-color: #222;
+      color: rgb(255, 255, 255);
+    }
+
+    nav .menu {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    nav .menu li a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    section {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      padding: 30px;
+      min-height: 60vh;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #111;
+      color: white;
+    }
+
+    article, aside {
+      background-color: rgba(255,255,255,0.85);
+      padding: 20px;
+      border-radius: 10px;
+    }
+
+    /* ==== Tampilan Berbeda per Halaman ==== */
+    #home {
+      <img src="gambar: .j;" alt="Foto dari komputer" width="300" height="200">
+
+      color: rgb(0, 7, 4);
+    }
+
+    #about {
+      background-color: #f1f1f1;
+    }
+
+    #contact {
+      background-color: #e0f7fa;
+    }
+
+    /* ==== Form ==== */
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #222;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #444;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    td, th {
+      border: 1px solid #999;
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+</head>
+<body id="home">
+  <nav>
+    <div class="logo">webhanss</div>
+    <ul class="menu">
+      <li><a href="#home" onclick="showPage('home')">Beranda</a></li>
+      <li><a href="#about" onclick="showPage('about')">Tentang syehan </a></li>
+      <li><a href="#contact" onclick="showPage('contact')">kontak</a></li>
+    </ul>
+  </nav>
+
+  <!-- ==================== HALAMAN BERANDA ==================== -->
+  <section id="homePage">
+    <article>
+      <h2>Selamat Datang</h2>
+      <p>Selamat datang di halaman branda website ini dan website ini bertujuan untuk menampilkan tentang data diri Saya
+        yang lengkap serta menjadikan website ini web perdana saya peribadi terimakasih telah berkunjung  </p>
+    </article>
+    <aside>
+      <h3>Data diri </h3>
+      <ul>
+        <li>Nama:Syehan permana sidik</li>
+        <li>kelas: if.b 24</li>
+        <li>hobi:olahraga </li>
+      </ul>
+    </aside>
+  </section>
+
+  <!-- ==================== HALAMAN TENTANG SAYA ==================== -->
+  <section id="aboutPage" style="display:none;">
+    <article>
+        <img src="ehan.jpg.jpg";alt="Foto Syehan" ;>
+      <h2> Data diri </h2>
+      <p>Nama saya <strong>Syehan permana sidik </strong>.  lahir di cianjur jawabarat ,
+         dan saya sekarang berkuliah di universitas suryakancana fakultas teknik informatika 
+        dan saya ini adalah seorang anak pertama dari ke tiga bersaudara dan memiliki cita cita menjadi seorang pembisnis
+        di bidang teknologi di masa depan  dan saya sangar berharap menjadi seseorang yang berguna di masa depan
+        dan saya adalah seorang guru ekstrakulikuler di mi alkautsar saya mengajar keterampilan Silat yang bertujuan
+        untuk menjaga budaya indonesia kepada generasi penerus </p>
+      
+    </article>
+    <aside>
+        <h3>Informasi Tambahan</h3>
+        <table>
+            <tr>
+            <th>No</th>
+            <th>Aspek</th>
+            <th>Detail</th>
+            
+            </tr>
+            <tr>
+            <td>1</td>
+            <td>Tempat, Tanggal Lahir</td>
+            <td>Cianjur, 05 oktober 2005</td>
+            </tr>
+            <tr>
+            <td>2</td>
+            <td>Alamat</td>
+            <td>Jl.Doktor muwardi gg perjuangan </td>
+            </tr>
+            <tr>
+            <td>4</td>
+            <td>Hobi</td>
+            <td>Olahraga, Membaca</td>
+            </tr>
+            <tr>
+            <td>5</td>
+            <td>Cita-cita</td>
+            <td>Pengusaha Teknologi</td>
+            </tr>
+        </table>
+
+    </aside>
+  </section>
+
+  <!-- ==================== HALAMAN KONTAK ==================== -->
+  <section id="contactPage" style="display:none;">
+    <article>
+      <h2>Hubungi Saya</h2>
+      <p>Anda dapat menghubungi saya melalui formulir di bawah ini:</p>
+      <p>dan mohon berikan keritik dan saran kepada saya menggunakan folmulir di bawah ini</p>
+      <form>
+        <label>Nama:</label>
+        <input type="text" placeholder="Masukkan nama">
+        <label>kritik:</label>
+        <input type="text" placeholder="berikan kritik anda....">
+        <label>saran:</label>
+        <textarea placeholder="Tuliskan  saran anda...."></textarea>
+        <button type="submit">Kirim</button>
+      </form>
+    </article>
+    <aside>
+      <h3>Media Sosial</h3>
+      <ul>
+        <li>Instagram: @syehan permana sidik </li>
+        <li>Email: syehan@gmail.com </li>
+      </ul>
+    </aside>
+  </section>
+
+  <footer>
+    <p>&copy; Syehan website  </p>
+  </footer>
+
+  <script>
+    // Script untuk navigasi antar halaman (tanpa reload)
+    function showPage(pageId) {
+      document.body.id = pageId;
+      document.querySelectorAll("section").forEach(sec => sec.style.display = "none");
+      document.getElementById(pageId + "Page").style.display = "grid";
+    }
+  </script>
+</body>
+</html>
