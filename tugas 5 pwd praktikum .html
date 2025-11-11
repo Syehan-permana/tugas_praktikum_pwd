@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Input Password Show/Hide (jQuery)</title>
+  <style>
+    :root{
+      --bg:#f6f7fb;
+      --card:#fff;
+      --muted:#4a5c80;
+      --accent:#2563eb;
+    }
+    body{
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(180deg, #eef2ff 0%, var(--bg) 100%);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      height:100vh;
+      margin:0;
+      padding:20px;
+    }
+    .card{
+      background:var(--card);
+      padding:20px 22px;
+      border-radius:12px;
+      box-shadow:0 6px 20px rgba(15,23,42,0.08);
+      max-width:420px;
+      width:100%;
+    }
+    label{ display:block; margin-bottom:8px; font-weight:600; color:#111827; }
+    .field{
+      position:relative;
+    }
+    input[type="password"],
+    input[type="text"]{
+      width:100%;
+      padding:12px 44px 12px 12px;
+      border-radius:8px;
+      border:1px solid #e5e7eb;
+      font-size:15px;
+      outline:none;
+    }
+    input:focus{ border-color:var(--accent); box-shadow:0 0 0 4px rgba(37,99,235,0.08); }
+    .toggle-btn{
+      position:absolute;
+      right:6px;
+      top:50%;
+      transform:translateY(-50%);
+      background:transparent;
+      border:0;
+      padding:6px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      border-radius:8px;
+    }
+    .toggle-btn:focus{ outline:2px solid rgba(37,99,235,0.25); }
+    .hint{ margin-top:8px; color:var(--muted); font-size:13px; }
+    .row{ display:flex; gap:8px; margin-top:12px; align-items:center; }
+    .checkbox { transform:scale(1.05); }
+    .strength {
+      margin-top:10px;
+      height:8px;
+      background:#eef2f5;
+      border-radius:999px;
+      overflow:hidden;
+    }
+    .strength > i{
+      display:block;
+      height:100%;
+      width:0%;
+      transition:width .25s ease;
+      background:linear-gradient(90deg,#f97316,#16a34a);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card" role="region" aria-label="Form password show hide">
+    <label for="password">Password</label>
+    <div class="field">
+      <input id="password" type="password" autocomplete="current-password" aria-describedby="pw-hint" />
+      <button id="toggle" class="toggle-btn" aria-pressed="false" aria-label="Tampilkan password">
+        <!-- Eye icon (closed by default) -->
+        <svg id="icon-eye" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+      </button>
+    </div>
+
+    <div id="pw-hint" class="hint">Tekan tombol mata untuk menampilkan/menyembunyikan password. Tahan tombol untuk sementara menampilkan.</div>
+
+    <div class="row">
+      <input id="showCheckbox" type="checkbox" class="checkbox" />
+      <label for="showCheckbox" style="margin:0; font-weight:500;">Tampilkan password</label>
+    </div>
+
+    <div class="strength" aria-hidden="true">
+      <i id="strength-bar"></i>
+    </div>
+  </div>
+
+  <!-- jQuery CDN -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+          integrity="sha256-+b1Qp3XQp8IRjYc8q+7F3W3s9c5wWf5h6f5sJZ6k1xA="
+          crossorigin="anonymous"></script>
+
+  <script>
+    $(function(){
+      var $pw = $('#password');
+      var $toggle = $('#toggle');
+      var $checkbox = $('#showCheckbox');
+      var $bar = $('#strength-bar');
+
+      function setType(show){
+        if(show){
+          $pw.attr('type','text');
+          $toggle.attr('aria-pressed','true').attr('aria-label','Sembunyikan password');
+          // change icon to eye-off
+          $('#icon-eye').replaceWith(
+            '<svg id="icon-eye" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' +
+              '<path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-6 0-10-7-10-7a21.9 21.9 0 0 1 5.22-5.94"></path>' +
+              '<path d="M1 1l22 22"></path>' +
+            '</svg>'
+          );
+        } else {
+          $pw.attr('type','password');
+          $toggle.attr('aria-pressed','false').attr('aria-label','Tampilkan password');
+          $('#icon-eye').replaceWith(
+            '<svg id="icon-eye" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">' +
+              '<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"></path>' +
+              '<circle cx="12" cy="12" r="3"></circle>' +
+            '</svg>'
+          );
+        }
+      }
+
+      // Toggle button click (toggle mode)
+      $toggle.on('click', function(e){
+        e.preventDefault();
+        var isShown = $pw.attr('type') === 'text';
+        setType(!isShown);
+        $checkbox.prop('checked', !isShown);
+      });
+
+      // Hold-to-reveal: mousedown show, mouseup/mouseleave hide
+      $toggle.on('mousedown touchstart', function(){
+        // show temporarily
+        setType(true);
+      }).on('mouseup mouseleave touchend touchcancel', function(){
+        // revert to checkbox state (if checkbox checked keep shown)
+        setType($checkbox.is(':checked'));
+      });
+
+      // Checkbox (persistent toggle)
+      $checkbox.on('change', function(){
+        setType($(this).is(':checked'));
+      });
+
+      // Optional: simple strength meter (very basic)
+      function pwStrength(pw){
+        var score = 0;
+        if(!pw) return 0;
+        if(pw.length >= 8) score += 1;
+        if(/[A-Z]/.test(pw)) score += 1;
+        if(/[0-9]/.test(pw)) score += 1;
+        if(/[^A-Za-z0-9]/.test(pw)) score += 1;
+        return score; // 0..4
+      }
+
+      $pw.on('input', function(){
+        var s = pwStrength($(this).val());
+        var pct = (s / 4) * 100;
+        $bar.css('width', pct + '%');
+        // optionally change color by inline style (keep simple)
+        if(s <= 1) $bar.css('background','linear-gradient(90deg,#ef4444,#f97316)');
+        else if(s == 2) $bar.css('background','linear-gradient(90deg,#f97316,#f59e0b)');
+        else if(s == 3) $bar.css('background','linear-gradient(90deg,#a3e635,#22c55e)');
+        else $bar.css('background','linear-gradient(90deg,#16a34a,#059669)');
+      });
+
+      // initialize
+      setType(false);
+      $bar.css('width','0%');
+    });
+  </script>
+</body>
+</html>
